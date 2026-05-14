@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="note-viewer">
+    <h2>LaTeX to XML Conversion</h2>
+    <div class="note-content">
+        {% verbatim %}
+        <h3 class="note-heading" style="margin-top: -15px;">UP Journals - TeX Workflow:</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="latextoxml_1" class="check-box">
+            <div class="step-content">
+                <label for="latextoxml_1"><strong>Check and Change Equation tags:<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Align, Aligned, Eqnarray – Split<br><br>Batch
+                        script:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\Convert_T2X_upj.bat filename.tex</code></pre>
+                </div>
+                <label for="latextoxml_1"><strong>Image Generation:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>py t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\TeX_Eqn_Img_Extract.py filename.xml</code></pre>
+                </div>
+            </div>
+        </div>
+        <h3 class="note-heading">OLH Journal</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="latextoxml_2" class="check-box">
+            <div class="step-content">
+                <label for="latextoxml_2"><strong>1. Change \Tree tag code in single line.<br>2. Insert enter mark
+                        before/after:<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;\pex&lt;snow2&gt;<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;\ex&lt;exno = i&gt;<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;\xe<br />
+                        3. Check space after \ex (Search for: \ex\ \ex{ )<br>4. Replace
+                        splited equation into one $$ to $ $<br>5. Merge \trans or \glt multipara to single and sep with
+                        \\<br>6. Check for Sup/Sub in text mode: \text{e_2}<br>7. Change: \textepsilon -
+                        $\epsilon$<br>8. Check \textipa symbol.<br>9. Check \cdot symbol.<br>10. If expex package, check
+                        carefully.<br>11. If Error: In preclean1.tex: Check for opening and closing brace
+                        mismatch<br><br>Batch script:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>t:\Products\03_LaTeX_to_XML\Support\OLH_TeX_Workflow\Convert_T2X_olh.bat filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="latextoxml_4" class="check-box">
+            <div class="step-content">
+                <label for="latextoxml_4"><strong>Checks after Conversion:<br />
+                        - Check text: missing, exbreak, check<br />
+                        - In XML (End of body matter), Check count of Example, Glossa List, Ref, Label.<br />
+                        - Check &lt;styled-content style=&quot;color: #000000&quot;&gt;<br />
+                        - Footnote list to take care<br />
+                        - Check footnote multiple para<br />
+                        - Example list number to take care<br />
+                        - Small caps need to take care</strong></label>
+            </div>
+        </div>
+    </div>
+    <h3 class="note-heading">Ergo:</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="latextoxml_5" class="check-box">
+        <div class="step-content">
+            <label for="latextoxml_5"><strong>Batch script:</strong></label>
+            <div class="code-wrapper">
+                <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                <pre><code>call t:\Products\03_LaTeX_to_XML\Support\ergo\Convert_T2X_ergo.bat filename.tex</code></pre>
+            </div>
+        </div>
+    </div>
+    <h3 class="note-heading">Inggrid:</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="latextoxml_6" class="check-box">
+        <div class="step-content">
+            <label for="latextoxml_6"><strong>Batch script:</strong></label>
+            <div class="code-wrapper">
+                <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                <pre><code>t:\Products\03_LaTeX_to_XML\Support\inggrid\inggrid.bat</code></pre>
+            </div>
+        </div>
+    </div>
+    <h3 class="note-heading">jcls:</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="latextoxml_7" class="check-box">
+        <div class="step-content">
+            <label for="latextoxml_7"><strong>Batch script:</strong></label>
+            <div class="code-wrapper">
+                <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                <pre><code>t:\Products\03_LaTeX_to_XML\Support\jcls\jcls.bat</code></pre>
+            </div>
+        </div>
+    </div>
+    <h3 class="note-heading">Phimp:</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="latextoxml_8" class="check-box">
+        <div class="step-content">
+            <label for="latextoxml_8"><strong>Batch script:</strong></label>
+            <div class="code-wrapper">
+                <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                <pre><code>t:\Products\03_LaTeX_to_XML\Support\phimp\Convert_T2X_phimp.bat filename.tex</code></pre>
+            </div>
+        </div>
+    </div>
+    {% endverbatim %}
+</div>
+</div>
+{% endblock %}

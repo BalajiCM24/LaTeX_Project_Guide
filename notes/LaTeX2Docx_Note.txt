@@ -1,0 +1,40 @@
+------------------------------------------------------
+LaTeX to DocX Conversion Checklist:
+------------------------------------------------------
+1. Compile the document error-free.
+2. Match the Compiled PDF with the Original MS (If any mismatch, inform Bharath).
+3. Backup the Source TeX and PDF.
+
+4. If NATBIB package used, copy bbl references inside the tex file.
+   
+   If BIBLATEX reference type, run script:
+   (a) Set Compiler name at the end of the document. For e.g.,
+       Compiler: pdflatex|lualatex|xelatex, bibtex|biber
+   (b) Then Execute - call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex
+   (c) Set the ini file (if required): biblatex_setting.ini
+       - Check bibpunct
+       - Check Reference cite author count
+       - Check Reference citation alphabet: yes or no
+
+5. CHECK REFERENCE STYLE - Number or Author Year and Then convert.
+   If Number reference (JORS), check for:
+     \usepackage[numbers]{natbib}
+     Replace: %\bibitem%[(<min>.+)%]%{(<min>.+)%} - \bibitem{#2}
+
+6. Execute Script for docx conversion:
+    Server Setup:
+    call t:\Products\01_LaTeX_to_Docx\Support\Convert_TeX2DocX.bat filename.tex
+    If any issues, use local Setup:
+    call d:\Balaji\Code\01_LaTeX_to_Docx\Support\Convert_TeX2Docx.bat filename.tex
+
+
+------------------------------------------------------
+Tool updated:
+------------------------------------------------------
+7.  Change FM Footnote as Normal text (and move before Introduction).
+%8.  Remove linenumber
+%9.  Check for \ctable{caption}{alignment}{footnote}{table data} if present manually update the code.
+%10. Check unsupported packages like subfigure, subcaption, enotez, endnotes, babel, minted, ifthen, xifthen, date, datetime2, xpatch, etc... If present, comment it.
+
+
+

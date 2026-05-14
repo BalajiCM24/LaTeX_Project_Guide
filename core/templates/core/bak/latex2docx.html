@@ -1,0 +1,104 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="note-viewer">
+    <h2>LaTeX to DocX Conversion – Checklist</h2>
+    <div class="note-content">
+        {% verbatim %}
+        <!-- <h3 class="note-heading">LaTeX to DocX Conversion Checklist:</h3> -->
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_1" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_1"><strong>1.&#160;&#160;Compile the document error-free.<br>
+                        2.&#160;&#160;Match the Compiled PDF with the Original MS (If any mismatch, inform Bharath).<br>
+                        3.&#160;&#160;Backup the Source TeX and PDF.</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_1" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_1"><strong>4.&#160;&#160;If NATBIB package used:<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Copy bbl reference text inside the
+                        tex file.<br /><br />
+                        If BIBLATEX reference type, run
+                        script:<br />
+                        (a) Set Compiler name at the end of the document. For e.g.,
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>Compiler: pdflatex|lualatex|xelatex, biber</code></pre>
+                        </div>
+                        (b) Then Execute:<br />
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex</code></pre>
+                        </div>
+                        (c) Set the ini file - biblatex_setting.ini (if required): <br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check bibpunct<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check Reference cite author count<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check Reference citation alphabet: yes or no
+                    </strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_2" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_2"><strong>5.&#160;&#160;Check Reference Style (Author Year or Number) and Then
+                        convert.<br /> If Number reference (JORS), code as:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>\usepackage[numbers]{natbib}
+
+Replace: %\bibitem%[(&lt;min&gt;.+)%]%{(&lt;min&gt;.+)%} - \bibitem{#2}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_3" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_3"><strong>6.&#160;&#160;Execute Script for docx conversion:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>call t:\Products\01_LaTeX_to_Docx\Support\Convert_TeX2DocX.bat filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <h3 class="note-heading">Auto LaTeX to DocX Conversion:</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_4" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_4"><strong>Zip the TeX and supporting files.<br />
+                        <u>Note:</u><br />
+                        &#160;&#160;1. The ZIP file should not contain any extra parent folder; all files must be at the
+                        root
+                        level.<br />
+                        &#160;&#160;2. The ZIP filename must not contain spaces or suffixes such as (1)<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(Incorrect examples: file name.zip,
+                        filename
+                        (2).zip).<br />
+                        &#160;&#160;3. Refer to the Test_files folder for sample conversions.<br />
+                        &#160;&#160;4. Copy the ZIP file into the Input folder
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>\\192.168.1.2\latextoxml\TeX2Docx\Input</code></pre>
+                        </div>
+                        <button onclick="window.open('file://///192.168.1.2/latextoxml/TeX2Docx/Input')">
+                            Open Folder
+                        </button>
+
+                        &#160;&#160;5. The converted DOCX file will be generated and automatically moved to the
+                        Output
+                        folder.
+                    </strong></label>
+            </div>
+        </div>
+        {% endverbatim %}
+        <div class="button-group">
+            <button id="reset-checklist" class="action-btn reset-btn">
+                <span>Reset Checklist</span>
+            </button>
+            <button id="save-as-txt" class="action-btn save-btn">
+                <span>Save as TXT</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="note-viewer">
+    <h2>UP Preediting – Checklist</h2>
+    <div class="note-content">
+        {% verbatim %}
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_1" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_1"><strong>1.&#160;&#160;Compile the document error-free<br />
+                        2.&#160;&#160;Match the compiled
+                        PDF with
+                        the Original MS<br />
+                        3.&#160;&#160;Backup it to the Source folder<br />4.&#160;&#160;Check for \input or \include, if
+                        present, copy the
+                        appropriate text
+                        and paste it inside the main tex file</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_1" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_1"><strong>4.&#160;&#160;If NATBIB package used:<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Copy bbl reference text inside the
+                        tex file.<br /><br />
+                        If BIBLATEX reference type, run
+                        script:<br />
+                        (a) Set Compiler name at the end of the document. For e.g.,
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>Compiler: pdflatex|lualatex|xelatex, biber</code></pre>
+                        </div>
+                        (b) Then Execute:<br />
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex</code></pre>
+                        </div>
+                        (c) Set the ini file - biblatex_setting.ini (if required): <br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check bibpunct<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check Reference cite author count<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check Reference citation alphabet: yes or no
+                    </strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_2" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_2"><strong>6.&#160;&#160;Convert Reference style according to the
+                        journal
+                        style</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>\bibliographystyle{t:/Products/03_LaTeX_to_XML/Support/common/bst/jname_chicago}</code></pre>
+                </div>
+                <label for="uppreedit_2"><strong>7.&#160;&#160;After bst convertion, check casing in the title and
+                        update it.<br>8.&#160;&#160;Convert Number reference type to Name and Year (based on journal
+                        style)<br>9.&#160;&#160;Copy bib
+                        references inside the TeX file<br />10.&#160;&#160;Ensure reference citation
+                        style.</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_3" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_3"><strong>11.&#160;&#160;Include track changes package in the Preedited
+                        file.</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>\def\changesfont{\fontsize{7}{9}\selectfont\sf}%
+\usepackage[commentmarkup=todo,todonotes={textsize=changesfont}]{changes}
+\definechangesauthor[name=Q, color=cyan]{Q}
+\def\hb{\hfill\break}
+\setlength{\marginparwidth}{20mm}
+\setlength{\marginparsep}{4pt}
+    \usepackage{soul}
+    \sethlcolor{cyan!30}
+\providecommand{\hil}[2]{\highlight[id=Q, comment={#1}]{#2}}%
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}%</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_4" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_4"><strong>12. Generate DOI
+                        from Crossref
+                        Simple Text Query (<a href="https://apps.crossref.org/SimpleTextQuery"
+                            target="_blank">https://apps.crossref.org/SimpleTextQuery</a>) and include it in
+                        reference.</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>py t:\Products\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_DOI_Insertion.py filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_5" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_5"><strong>13.&#160;&#160;Check Appendix, if more than 5 pages - Check with TL and
+                        remove from TeX and move to CE.<br />14.&#160;&#160;If any scanned Table, OCR
+                        it.<br></strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_6" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_6"><strong>15.&#160;&#160;Upload to Overleaf
+                        (<a href="https://www.overleaf.com/project"
+                            target="_blank">https://www.overleaf.com/project)</a><br />
+                        16.&#160;&#160;Include Word Count in PDF
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>perl t:\Products\03_LaTeX_to_XML\Support\common\TeXcount\texcount.pl -incbib -sum filename.tex</code></pre>
+                        </div>
+                        17.&#160;&#160;Enable Reviewing (edit become
+                        suggestion)<br />
+                        18.&#160;&#160;Share -&gt;
+                        Turn-on link sharing -&gt; Copy the edit project link.<br />
+                        19.&#160;&#160;Update
+                        Sync-today
+                    </strong></label>
+            </div>
+        </div>
+        <h3 class="note-heading">Message to TL:</h3>
+        <div class="step-content">
+            <label for="uppreedit_7"><strong>Filename - Preediting Over - Word Count:
+                    xxx<br>https://www.overleaf.com/xxxx<br><br>Notes (if any):<br>&#160;&#160;&#160;&#160;1. Note
+                    point1<br>&#160;&#160;&#160;&#160;2. Note
+                    point2</strong></label>
+        </div>
+        {% endverbatim %}
+        <div class="button-group">
+            <button id="reset-checklist" class="action-btn reset-btn">
+                <span>Reset Checklist</span>
+            </button>
+            <button id="save-as-txt" class="action-btn save-btn">
+                <span>Save as TXT</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

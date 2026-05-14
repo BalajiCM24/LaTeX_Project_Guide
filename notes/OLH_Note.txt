@@ -1,0 +1,168 @@
+------------------------------------
+Glossa Pagination Process:
+------------------------------------
+1. Create folder of filename in d:\Balaji\Templates\OLH_glossa\Live\
+2. Epsilon - F2 -> create-folder-structure
+3. Copy the files from server to local: d:\Balaji\Templates\OLH_glossa\Live\glossa-xxx\01_Input\2501DD\
+4. Copy the TeX and supporting files to 02_Pagination folder.
+5. Compile the document error-free and match with the authors' manuscript.
+
+6. - If Reference type is natbib/bibtex:
+     Copy the reference text inside the manuscript.
+   - If Reference type is biblatex, convert to Natbib/Bibitem using script:
+     Set Compiler: xelatex, biber
+     Server: call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_glossa.py filename.tex
+     Local:  call py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_glossa.py filename.tex
+
+7. (NOT REQUIRED FOR STAR JOURNAL) Generate DOI from Crossref Simple Text Query (https://apps.crossref.org/SimpleTextQuery) and include it in reference.
+   Server: py t:\Products\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_DOI_Insertion.py main.tex
+   Local:  py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_Clean_new.py main.tex
+8. OLH TeX Pagination Cleanup Script:
+   Server: py t:\Products\03_LaTeX_to_XML\Support\OLH_TeX_Workflow\Glossa_TeX_Pgn_Cleanup.py filename.tex
+   Local:  py d:\Balaji\Code\03_LaTeX_to_XML\Support\Glossa\Glossa_TeX_Pgn_Cleanup.py filename.tex
+------------------------------------
+1.  Manually ensure the code of FM.
+2.  Artwork process
+3.  Check Metadata docx
+4. "Competing interests" is mandatory - Get from MS, if not get from Metadata, else use default and raise query to author.
+    Single author: The author has no competing interests to~declare.
+    Multi author: The authors have no competing interests to~declare.
+5. Check Spelling - \section*{Acknowledgements} (Not for STAR journal)
+6. Fig/Table caption should place at bottom (For glossapx: place top for table)
+7. Check end dot for footnote.
+
+8. F2 -> olh-checklist (Cursor from Tex file)
+    1.  General Replace:
+        Check range     - Endash     - ([0-9]+)-([0-9]+)
+        (...| . . .)    - Ellipse (\textellipsis|\ldots|$\text{\ldots}$)
+        ( ,| .| :| ;)   - Check and remove space
+        ""              - double quotes
+    2.  Insert link tags for http, www, .gov, .net, .com (\url, \href, \doi, \mail)
+    3.  Heading level should be Sentence case
+    4.  Search for %\label%{(<min>.+)%} ?(%?|%#|%*) and move label at end of sentence
+    5.  Search for year ( |%()([0-9][0-9][0-9][0-9][a-z]?) and tag it \cite (For xml purpose)
+    6.  Ref citation remove p. from (Author et al. 2020: p. 49)
+    7.  Check \mathbf symbol and text printed correctly.
+    8.  Check double doi
+------------------------------------
+
+1. Check para by para with MS
+2. Check footnote para by para with MS
+3. Check tikz image
+4. Tree image (a and b) place as Top and Bottom (not Left and Right)
+5. All the Tree image should align left
+6. Fix \noindent after List, Example, Quote (Not required for Star Journal)
+7. Correction glossa-10671: "thecognate object is provid" should be aligned with "La", not with the curly bracket
+8. Check Alphabetical Order in reference list (Macro: glossa-ref-alphabet-check).
+9. Do random check doi in reference
+10. Refcheck: Search for ? in pdf. All reference should be cross linked - if missing or excess raise query.
+11. Raise query if Fig/Tab/Ref citation & Affiliation missing.
+12. For OLH, include TS query in PDF (1st page)
+
+QC Corr Update (Not for STAR Journal):
+1. Check rowspan in tables.
+2. \citealp should be seperated by semicolon. Check throughout - NOT Required for star journal
+
+Au Corr update:
+Check footnote label citation like ...text (i) text...
+
+------------------------------------
+1. Check embedded font subset (PDF properties)
+2. Check links are disabled (except \href, \url)
+3. Set PDF Properties (Title, Author Name, Keywords) - NOT REQUIRED for Glossapx
+    Author Name: Author1
+    Author Name: Author1 and Author 2
+    Author Name: Author1, Author2 and Author3
+4. PDF Copyright Statement set
+5. Remove double quotes in pdfkeywords - comma change to semicolon
+6. Compare PDF file
+7. Move to Vinoth/Antony for random QC.
+8. BM Order:
+   - Abbreviations
+   - Data availability/Supplementary files
+   - Ethics and consent
+   - Funding information
+   - Acknowledgements
+   - Competing interests
+   - Authors' contributions
+
+------------------
+Star Journal:
+------------------
+1. Use custom "how to cite" format (matching the journal's reference style) - Sample (star-1-17534)
+2. COI Statement:
+   The author declares that they have no competing interests.
+   The authors declare that they have no competing interests.
+3. Change \section*{Data availability statement} - \section{Data availability}
+4. Keywords included in front matter (below Abstract, Semicolon sep, Retain the case as it is), both in PDF and XML.
+5. No final period in section heading numbers: "1 Introduction," not "1. Introduction."
+6. Bibliography style (reference list and in-text citations) kept as in manuscript; no reformatting, please.
+7. "Acknowledgments" spelled American-style, not "Acknowledgements."
+8. Siva: Figure and Table bold not needed
+9. LATEST UPDATE: Please do not replace commas with semicolons in reference citation lists.
+
+------------------
+
+------------------
+Code Note:
+------------------
+1. Change to \begin{itemize}[leftmargin=2.6pc,labelsep=10pt]%[itemindent=-10pt]
+2. For \ex in footnote:
+   \footnote{Text text 
+
+	\noindent\parbox{0.967\linewidth}{
+	\setlength{\Exlabelsep}{4pt}
+	\def\gltoffset{-3.5pt}
+
+        \ex. Text text \label{i}
+
+   }}
+3. Value of \parindent=17.008pt%\hspace*{17.008pt}
+4. To adjust the Sub Example label sep: \subexlabelsep{28pt}
+5. \glossglue=2pt% Allow space between words in glossa list
+6. For citation in examples, right align - \hb \phantom{a}~\hfill
+7. Footnote above space: \addtolength{\skip\footins}{10pt}%
+8. \resizebox{100mm}{!}{}
+9. xelatex, xunicode: \def\textdownstep{{\char"A71C}}
+10.Example tree image horizontal align with exno.
+   \ex  \label{`ikecausetree} ~\\[-26pt]
+   \Tree
+11. expex: \pex[labelalign=left,labeloffset=34pt]<ex-causer2> ~~\citet{AAS15}
+12. In gb4e_v1.sty, space can be adjust using:
+       \begin{xlist}
+       \def\gltoffset{2pt}%
+       \itemsep=6pt% Space between ex list \a. and \b.
+13. If algorithm package, add the code for rule adjustment (glossa-18053_ke):
+        \def\fs@ruled{%
+          \def\@fs@cfont{\bfseries}%
+          \let\@fs@capt\floatc@ruled
+          \def\@fs@pre{\hrule height 0.5pt \vskip4pt}   % Top rule
+          \def\@fs@post{\vskip4pt \hrule height 0.5pt \relax}        % Bottom rule
+          \def\@fs@mid{\vskip4pt  \hrule height 0.5pt \vskip4pt}   % Rule before caption
+          \let\@fs@iftopcapt\iftrue
+        }
+14. Ellipsis in TeX:
+    \textellipsis
+    \ldots   (don't use in mathmode)
+    \text{\ldots}
+15. \newcommand*{\doi}[1]{doi: \href{https://doi.org/\detokenize{#1}}{\detokenize{#1}}}
+16. Bold symbol: \symbf{AaBb?aﬂ?\beta}
+
+List only:
+\begin{enumerate}[leftmargin=35pt, labelsep=-4pt]
+
+List in exe:
+\begin{enumerate}[leftmargin=18pt, labelsep=-8pt]
+
+
+------------------
+Mail:
+------------------
+
+Dear <user>,
+
+I have completed LaTeX typesetting for the below article and placed it in the below server location:
+\\192.168.1.3\kpo\Typesetting\Common\Balaji\2026\03_March\260318\glossa-18394_neagu\For_QC\
+
+
+------------------------------------

@@ -1,0 +1,91 @@
+--------------------------------------------
+PoP Track Changes Process:
+--------------------------------------------
+1. Check CE Query in Overleaf and include it in TeX file:
+      \hl{Text}
+      \hil{query}{Text}
+      \highlight[id=Q, comment={Query}]{Text}
+2. latexdiff filename_MS.tex filename_CE.tex > filename_track.tex
+   pdflatex filename_track.tex
+3. In Track changes PDF, some doi not working, due to colon present at end of doi - need to check.
+   Replace <space>^J}\DIFaddend         -       }\DIFaddend
+4. Backup into source folder.
+
+--------------------------------------------
+PoP LaTeX Pagination Process:
+--------------------------------------------
+0. Generate DOI from Crossref Simple Text Query (https://apps.crossref.org/SimpleTextQuery) and include it in reference.
+   Server: py t:\Products\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_DOI_Insertion.py filename.tex
+   Local:  py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_Clean_new.py filename.tex
+1. Pop TeX Pagination Cleanup:
+   Server: py t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\UPJ_TeX_Pgn_Cleanup.py filename.tex
+   Local: py d:\Balaji\Code\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\UPJ_TeX_Pgn_Cleanup.py filename.tex
+
+1. Manually tag the FM code based on the sample.
+2. Remove unwanted packages from the MS.
+   Change: \usepackage[labelfont=rm,justification=centering]{subcaption}
+3. Figure<space>   - Figure~
+4. Table<space>    - Table~
+5. Include Author Affiliation section:
+    \begin{auaffil}
+    \textbf{Author name}\ \orcidaffil{0000-0000-0000-0000}\hb
+    Author affiliation
+    \end{auaffil}
+
+6. jel code should be semicolon seperation
+7. \thead - All caps
+8. Copyedited Journal (Harvard Style): follow italics for et~al.
+9. Image process
+10. Check Grep Checklist
+11. jors (For Vancouver): Don't change Reference Order and do Manual ref conversion.
+
+
+1. Check para by para
+2. Check Metadata
+
+QC Points:
+Check SMALL CAPS \textsc{} produces the output correctly in PDF.
+Insert end period for all footnote mandatory.
+Place the punctuation before footnote.
+Equation next para should always noindent
+Quote, list - next para should always noindent
+For Appendix citation no need link always
+Insert country code for affiliation and make it consistent with other affiliation
+%%%%NOT REQUIRED - All Theorem Style like (Definition, Example, Proof, etc...) should follow Quote style.
+
+4. Figure/Table - Single Column (Nearby placement and here placement)
+                  Double Column (Top/Bottom)
+5. For Single Column, Place caption at top align of marginal column of the figure, if not possible place it bottom align of the figure.
+        Also, make it consistent for the remaining figures.
+
+6. IMPORTANT: TELLUSA follow new template TELLUS (CHECK FOR TEMPLATE WITH STIX FONT)
+              TELLUSB follow old template
+6. TellusA & B: Table & Figure caption (place bottom)
+7. TellusA & B (Two column layout): Sandwich figures not allowed
+                                    Endnote (Not Footnote) - \printendnotes
+8. All reference should be cross linked - if missing or excess raise query.
+9. Search for ? in pdf.
+10. Reference and Citation: Alpha order (NOT required for Vancouver type Journals)
+
+10. Check BM order and mandatory sections
+11. Do random check doi in reference
+12. Check CE query and default query and insert
+    Query:
+    1. Orcid missing query
+    2. Funding Statement query
+    3. Competing Interest Query (Mandatory)
+    4. Figure alt text Query
+    5. CE Query if any
+    6. Check email for all, if any missing, raise query.
+
+13. PDF Properties:
+        Set Title
+        Set Author Name: Author1
+                         Author1 and Author2
+                         Author1, Author2 and Author2
+        No Subject and Keywords required.
+
+
+Country Code (https://www.nationsonline.org/oneworld/country_code_list.htm)
+
+--------------------------------------------

@@ -1,0 +1,219 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="note-viewer">
+    <h2>UP Typesetting – Checklist</h2>
+    <div class="note-content">
+        {% verbatim %}
+        <h3 class="note-heading" style="margin-top: -16px;">Track Changes Process:</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_1" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_1"><strong>1. Check CE Query in Overleaf and include it in TeX
+                        file using:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>\hil{query}{Text}
+\hl{Text}
+\highlight[id=Q, comment={Query}]{Text}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_2" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_2"><strong>2. LaTeX Track Changes:<br /><br />Create
+                        filename_track.tex using:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>\RequirePackage{shellesc}
+\RequirePackage{xstring}
+
+% Remove the suffix "_track" from jobname
+\StrGobbleRight{\jobname}{6}[\BaseName]
+
+\ShellEscape{
+latexdiff \BaseName_PE.tex \BaseName_CE.tex > \BaseName_diff.tex
+}
+
+\input{\BaseName_diff.tex}
+\endinput</code></pre>
+                </div>
+                <label for="uptypeset_2"><strong>Manual:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>latexdiff filename_MS.tex filename_CE.tex &gt; filename_track.tex
+pdflatex filename_track.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_3" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_3"><strong>3. In Track changes PDF, some doi not working, due to colon present at
+                        end of doi - need to check.</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Replace &lt;space&gt;^J}\DIFaddend         -       }\DIFaddend</code></pre>
+                </div>
+            </div>
+        </div> -->
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_4" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_4"><strong>3. Ensure the Track Changes PDF and Backup into source
+                        folder.</strong></label>
+            </div>
+        </div>
+        <h3 class="note-heading">LaTeX Pagination Process:</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_5" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_5"><strong>Generate DOI from Crossref Simple Text Query
+                        (<a href="https://apps.crossref.org/SimpleTextQuery"
+                            target="_blank">https://apps.crossref.org/SimpleTextQuery</a>) and include it in
+                        reference.</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>py t:\Products\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_DOI_Insertion.py filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_6" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_6"><strong>UP TeX Pagination Cleanup:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>py t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\UPJ_TeX_Pgn_Cleanup.py filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_7" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_7"><strong>1. Manually tag the FM code based on the sample.<br>2. Remove unwanted
+                        packages from the MS.<br />3. Figure&lt;space&gt; - Figure~<br>4. Table&lt;space&gt; -
+                        Table~</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_8" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_8"><strong>5. Include Author Affiliation section:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>\begin{auaffil}
+\textbf{Author name}\ \orcidaffil{0000-0000-0000-0000}\hb
+Author affiliation
+\end{auaffil}</code></pre>
+                </div>
+                <label for="uptypeset_8"><strong>6. jel code should be semicolon seperation<br>7. \thead - All
+                        caps<br>8. Copyedited Journal (Harvard Style): follow italics for et~al.<br></strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_9" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_9"><strong>9. Image Process (Setting Trim size, Resolution: 300 dpi; Sizing)<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Trim: Alt i r<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Canvas Size: Alt i s<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Flatten Image: Alt l f<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Image Size: Alt Ctrl i<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;If image quality is less, raise author query.<br />
+                        <br>10. Check UP Grep Checklist<br>11. jors (For Vancouver): Don&#x27;t change Reference
+                        Order and do Manual ref conversion.</strong></label>
+            </div>
+        </div>
+        <hr /><br />
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_9" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_9"><strong>1. Check para by para<br>2. Check
+                        Metadata<br>3. Check SMALL CAPS \textsc{} produces the output correctly in
+                        PDF.<br>4. Insert end period for all footnote mandatory.<br>5. Place the punctuation before
+                        footnote.<br>6. Equation next para should always noindent<br>7. Quote, list - next para should
+                        always
+                        noindent<br>8. For Appendix citation no need link always<br>9. Insert country code for
+                        affiliation and
+                        make it consistent with other affiliation</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_10" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_10"><strong>10. Figure/Table<br />
+                        - Single Column (Nearby placement and here placement)<br />
+                        - Double Column (Top/Bottom)<br />
+                        - For Single Column, Place caption at top align of marginal column of the figure, if not
+                        possible place it bottom align of the figure. Also, make it consistent for the remaining
+                        figures.<br /><br />
+                        12. IMPORTANT: TELLUSA follow new template TELLUS (CHECK FOR TEMPLATE WITH STIX FONT). TELLUSB
+                        follow old template<br />
+                        13. TellusA & B: Table & Figure caption (place bottom)<br />
+                        14. Two column layout:<br />
+                        - Sandwich figures not allowed<br />
+                        - Endnote (Not Footnote) - \printendnotes<br />
+                    </strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_13" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_13"><strong>15. All reference should be cross linked - if missing or excess raise
+                        query.<br>16. Search for ? in pdf.<br>17. Reference and Citation: Alpha order (NOT required for
+                        Vancouver type Journals)<br><br>18. Check BM order and mandatory sections<br>19. Do random check
+                        doi in reference<br>20. Check CE query and default query and insert:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Query:
+    1. Orcid missing query
+    2. Funding Statement query
+    3. Competing Interest Query (Mandatory)
+    4. Figure alt text Query
+    5. CE Query if any
+    6. Check email for all, if any missing, raise query.</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_14" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_14"><strong>13. PDF Properties:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Set Title
+Set Author Name: Author1
+                 Author1 and Author2
+                 Author1, Author2 and Author2
+No Subject and Keywords required.</code></pre>
+                </div>
+                <label for="uptypeset_15"><strong>Get Country Code from <a
+                            href="https://www.nationsonline.org/oneworld/country_code_list.htm"
+                            target="_blank">https://www.nationsonline.org/oneworld/country_code_list.htm</a></strong></label>
+            </div>
+        </div>
+        <h3 class="note-heading">Mail:</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="olhtypeset_21" class="check-box">
+            <div class="step-content">
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Dear &lt;user&gt;,
+I have completed LaTeX typesetting for the below article and placed it in the 
+below server location:
+\\192.168.1.3\kpo\Typesetting\Common\</code></pre>
+                </div>
+            </div>
+        </div>
+        {% endverbatim %}
+        <div class="button-group">
+            <button id="reset-checklist" class="action-btn reset-btn">
+                <span>Reset Checklist</span>
+            </button>
+            <button id="save-as-txt" class="action-btn save-btn">
+                <span>Save as TXT</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

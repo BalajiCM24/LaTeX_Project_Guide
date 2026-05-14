@@ -1,0 +1,58 @@
+------------------------------------------------------
+UP Pre-editing or Preediting:
+------------------------------------------------------
+1.  Compile the document error-free
+2.  Match the compiled PDF with the Original MS
+3.  Backup it to the Source folder
+
+4.  If biblatex reference type, follow biblatex conversion:
+    - Set Compiler name at the end of the document. For e.g.,
+      Compiler: lualatex, biber
+    Execute script:
+       Server: call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex
+       Local:  call py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex
+
+5.  Check for \input or \include, if present, copy the text inside the tex file
+6.  Convert Reference style according to the journal style
+    Server: \bibliographystyle{t:/Products/03_LaTeX_to_XML/Support/common/bst/jname_chicago}
+    Local:  \bibliographystyle{d:/Balaji/Code/LaTeX/bst/jname_chicago}
+7.  After bst convertion, check casing in the title and update it.
+8.  Convert Number reference type to Name and Year (based on journal style)
+9.  Copy bib references inside the TeX file
+
+10. Include track changes Package in the PE file.
+    \def\changesfont{\fontsize{5}{6}\selectfont\sf}%
+    \usepackage[commentmarkup=todo,todonotes={textsize=changesfont}]{changes}
+    \definechangesauthor[name=Q, color=cyan]{Q}
+    \def\hb{\hfill\break}
+    \setlength{\marginparwidth}{20mm}
+    \setlength{\marginparsep}{4pt}
+       \usepackage{soul}
+       \sethlcolor{cyan!30}
+    \providecommand{\hil}[2]{\highlight[id=Q, comment={#1}]{#2}}%
+    \providecommand{\doi}[1]{\url{https://doi.org/#1}}%
+
+11. Ensure reference citation style.    
+12. Generate DOI from Crossref Simple Text Query (https://apps.crossref.org/SimpleTextQuery) and include it in reference.
+    Server: py t:\Products\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_DOI_Insertion.py filename.tex
+    Local:  py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_Clean_new.py filename.tex
+13. Check Appendix, if more than 5 pages -
+    Check with TL and remove from TeX and move to CE.
+14. If any scanned Table, OCR it.
+
+15. Upload to Overleaf and Include Word Count in PDF
+16. Enable Reviewing (edit become suggestion)
+17. Share -> Turn-on link sharing -> Copy the edit project link.
+18. Update Sync-today
+
+--------------------------------
+Msg to TL:
+--------------------------------
+
+Filename - Preediting Over - Word Count: xxx
+https://www.overleaf.com/xxxx
+
+Notes (if any):
+1. Note point.
+
+--------------------------------

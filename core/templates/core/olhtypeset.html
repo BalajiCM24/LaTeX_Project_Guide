@@ -1,0 +1,164 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="note-viewer">
+    <h2>OLH Typesetting – Checklist</h2>
+    <div class="note-content">
+        {% verbatim %}
+        <!-- <h3 class="note-heading">Glossa Pagination Process:</h3> -->
+        <div class="checklist-item">
+            <input type="checkbox" id="uppreedit_1" class="check-box">
+            <div class="step-content">
+                <label for="uppreedit_1"><strong>1.&#160;&#160;Compile the document error-free<br />
+                        2.&#160;&#160;Match the compiled
+                        PDF with
+                        the Original MS<br />
+                        3.&#160;&#160;Backup it to the Source folder<br />4.&#160;&#160;Check for \input or \include, if
+                        present, copy the
+                        appropriate text
+                        and paste it inside the main tex file</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="latex2docx_1" class="check-box">
+            <div class="step-content">
+                <label for="latex2docx_1"><strong>4.&#160;&#160;If NATBIB package used:<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Copy bbl reference text inside the
+                        tex file.<br /><br />
+                        If BIBLATEX reference type, run
+                        script:<br />
+                        (a) Set Compiler name at the end of the document. For e.g.,
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>Compiler: pdflatex|lualatex|xelatex, biber</code></pre>
+                        </div>
+                        (b) Then Execute:<br />
+                        <div class="code-wrapper">
+                            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                            <pre><code>call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_glossa.py filename.tex</code></pre>
+                        </div>
+                        (c) Set the ini file - biblatex_setting.ini (if required): <br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check bibpunct<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check Reference cite author count<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;– Check Reference citation alphabet: yes or no
+                    </strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_5" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_5"><strong>(NOT REQUIRED FOR STAR JOURNAL) Generate DOI from Crossref Simple Text
+                        Query
+                        (<a href="https://apps.crossref.org/SimpleTextQuery"
+                            target="_blank">https://apps.crossref.org/SimpleTextQuery</a>) and include it in
+                        reference.</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>py t:\Products\03_LaTeX_to_XML\Support\common\Ref_doi\Bib_DOI_Insertion.py filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_6" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_6"><strong>OLH TeX Pagination Cleanup Script:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>py t:\Products\03_LaTeX_to_XML\Support\OLH_TeX_Workflow\Glossa_TeX_Pgn_Cleanup.py filename.tex</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="olhtypeset_4" class="check-box">
+            <div class="step-content">
+                <label for="olhtypeset_4"><strong>1. Manually ensure the code of FM.<br>2. Check
+                        Metadata<br>3. &quot;Competing interests&quot; is mandatory - Get from MS, if not get from
+                        Metadata, else use default and raise query to author.</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Single author: The author has no competing interests to~declare.
+Multi author: The authors have no competing interests to~declare.</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_9" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_9"><strong>9. Image Process (Setting Trim size, Resolution: 300 dpi; Sizing)<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Trim: Alt i r<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Canvas Size: Alt i s<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Flatten Image: Alt l f<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;Image Size: Alt Ctrl i<br />
+                        &#160;&#160;&#160;&#160;&#160;&#160;If image quality is less, raise author query.<br />
+                        <br>5. Check Spelling - \section*{Acknowledgements} (Not for STAR
+                        journal)<br>6. Figure/Table caption should place at bottom (For glossapx: place top for
+                        table)<br>7. Check end dot for footnote.<br>10. Check OLH Grep Checklist</strong></label>
+            </div>
+        </div>
+        <hr /><br />
+        <div class="checklist-item">
+            <input type="checkbox" id="olhtypeset_6" class="check-box">
+            <div class="step-content">
+                <label for="olhtypeset_6"><strong>
+                        1. Check para by para with MS<br>
+                        2. Check footnote para by para with MS<br>
+                        3. Check tikz image<br>
+                        4. Tree image (a and b) place as Top and Bottom (not Left and Right)<br>
+                        5. All the Tree image should align left<br>
+                        6. Fix \noindent after List, Example, Quote (Not required for Star Journal)
+                    </strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="olhtypeset_6" class="check-box">
+            <div class="step-content">
+                <label for="olhtypeset_6"><strong>
+                        8. Check Alphabetical Order in reference list (Macro: glossa-ref-alphabet-check).<br>
+                        9. Do random check doi in reference<br>
+                        10. Refcheck: Search for ? in pdf. All reference should be cross linked - if missing or excess
+                        raise query.<br>
+                        11. Raise query if Figure/Table/Reference citation &amp; Affiliation missing.<br>
+                        12. For OLH, include TS query in PDF (1st page)</strong></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="uptypeset_14" class="check-box">
+            <div class="step-content">
+                <label for="uptypeset_14"><strong>13. PDF Properties:</strong></label>
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Author Name: Author1
+Author Name: Author1 and Author 2
+Author Name: Author1, Author2 and Author3</code></pre>
+                </div>
+                <label for="uptypeset_15"><strong>BM Order:<br>- Abbreviations<br>- Data availability/Supplementary
+                        files<br>- Ethics and consent<br>- Funding information<br>- Acknowledgements<br>- Competing
+                        interests
+                        - Authors&#x27; contributions</strong></label>
+            </div>
+        </div>
+
+        <h3 class="note-heading">Mail:</h3>
+        <div class="checklist-item">
+            <input type="checkbox" id="olhtypeset_21" class="check-box">
+            <div class="step-content">
+                <div class="code-wrapper">
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <pre><code>Dear &lt;user&gt;,
+I have completed LaTeX typesetting for the below article and placed it in the 
+below server location:
+\\192.168.1.3\kpo\Typesetting\Common\</code></pre>
+                </div>
+            </div>
+        </div>
+        {% endverbatim %}
+        <div class="button-group">
+            <button id="reset-checklist" class="action-btn reset-btn">
+                <span>Reset Checklist</span>
+            </button>
+            <button id="save-as-txt" class="action-btn save-btn">
+                <span>Save as TXT</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

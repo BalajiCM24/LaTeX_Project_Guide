@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Project Guide </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header class="top-bar">
+        <!-- add curv edges to the img -->
+        <img src="{% static 'images/silicon.png' %}" alt="Logo"
+            style="width: 150px; opacity: 0.90; border-radius: 10px;">
+        <h1>Siliconchips – LaTeX Project Guide</h1>
+        <button id="theme-toggle" class="theme-toggle">Dark Mode</button>
+    </header>
+
+    <div class="layout-container">
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <a href="{% url 'home' %}" class="nav-section">Home</a>
+
+                <div class="nav-section">Process Notes</div>
+                <a href="{% url 'latex2docx' %}" class="nav-item">&#160;&#160;&#160;&#160;LaTeX to Docx</a>
+                <a href="{% url 'uppreedit' %}" class="nav-item">&#160;&#160;&#160;&#160;UP Preedit</a>
+                <a href="{% url 'uptypeset' %}" class="nav-item">&#160;&#160;&#160;&#160;UP Typeset</a>
+                <a href="{% url 'olhtypeset' %}" class="nav-item">&#160;&#160;&#160;&#160;OLH Typeset</a>
+                <a href="{% url 'latextoxml' %}" class="nav-item">&#160;&#160;&#160;&#160;LaTeX to XML</a>
+
+                <div class="nav-section">Website</div>
+                <a href="https://siliconchips-synctoday.com/" target="_blank"
+                    class="nav-item ext-link">&#160;&#160;&#160;&#160;Sync Today</a>
+                <a href="https://kpopspl.greythr.com/" target="_blank" class="nav-item ext-link">
+                    &#160;&#160;&#160;&#160;GreyHR</a>
+                <a href="https://central.ubiquity.press/login?from=/journals/production" target="_blank"
+                    class="nav-item ext-link">&#160;&#160;&#160;&#160;Central Station</a>
+                <a href="https://www.overleaf.com/project" target="_blank"
+                    class="nav-item ext-link">&#160;&#160;&#160;&#160;Overleaf</a>
+
+                <div class="nav-section">Tracking</div>
+                <a href="https://docs.google.com/spreadsheets/d/1mAzZwNNozvnUrAoDgJxDm5-An8pqOH9fAh0mktlZcZs/edit?usp=sharing"
+                    target="_blank" class="nav-item ext-link">&#160;&#160;&#160;&#160;Tool Track</a>
+                <a href="https://docs.google.com/spreadsheets/d/1mqqrqCZg93FXD37wlZsdX4_cx9GBUpiy/edit?usp=sharing&ouid=105798220101286551349&rtpof=true&sd=true"
+                    target="_blank" class="nav-item ext-link">&#160;&#160;&#160;&#160;Feedback Track</a>
+                <a href="https://central.ubiquity.press/login?from=/journals/production" target="_blank"
+                    class="nav-item ext-link">&#160;&#160;&#160;&#160;Web Notes</a>
+            </nav>
+        </aside>
+
+        <main class="content-panel">
+            {% block content %}
+            {% if is_home %}
+            <div class="welcome-container">
+                <h2>Welcome to LaTeX Project Guide</h2>
+                <p>Select a process note from the left panel to begin, or access project websites directly.</p>
+            </div>
+            {% endif %}
+            {% endblock %}
+        </main>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

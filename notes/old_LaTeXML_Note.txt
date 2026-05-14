@@ -1,0 +1,178 @@
+-------------------
+TeX Process:
+-------------------
+1. Compile the document error-free.
+2. Match the Compiled PDF with the Original Manuscript.
+3. Backup the Source TeX and PDF.
+4. *** IF PRE-EDITED FILE, CREATE TRACK CHANGES PDF FROM CE FILE. ***
+
+5. If biblatex reference type, follow biblatex conversion:
+   - Set Compiler name at the end of the document. For e.g.,
+     Compiler: lualatex, biber
+   Biblatex to Natbib/Bibitem conversion script:
+   For jcls:
+      Server: call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_jcls.py main.tex
+      Local:  call py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_jcls.py main.tex
+   For inggrid:
+      Server: call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_inggrid.py main.tex
+      Local:  call py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_inggrid.py main.tex
+   For Others Journals:
+      Server: call py t:\Products\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex
+      Local:  call py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv.py filename.tex
+
+6. Match the natbib_ref.pdf with the Original Manuscript
+7. Copy bib references inside the tex file
+
+8. Manual update the TeX code based on Metadata (jcls & inggrid & Ergo [filename: ergo-0000.tex] not required):
+   \xmlauthor[1]{Author Name}{email}{orcid}
+   \xmlaffiliation[1]{Address}
+   \jname{pop}%For UP journals only
+   \jnlvol{1}
+   \jnliss{1}
+   \jnldoi{1}
+   \arttype{Article}
+   \datereceived{01 Jan 2024}
+   \dateaccepted{01 Jan 2024}
+   \abstract{Text}
+   \keywords{Text}
+   \jelcode{Text}
+   Change Equations: Align, Eqnarray, Aligned  TO  Split
+
+9. If first xml workflow (TellusA and TellusB), break the equation based on the double column width.
+
+10. Move BM headings like Acknowledgements, Author Contributions, etc.; before \appendix.
+11. Change the code
+        \usepackage[authoryear,sort]{natbib} - Check for reference citation after conversion
+        \begin{threeparttable}
+        \begin{tablenotes}
+        \begin{subfigure}
+        \subcaption
+        \subfloat
+        \hypertarget
+
+12. Check unsupported packages present babel, pagella-otfm, minted, tikz, ifthen, xifthen, date, tabu, enotez, mdframed, etc.
+13. In the converted XML, check footnote are converted appropriately.
+14. Check end of body matter (Example, glossa list, ref, label) and ensure in XML.
+15. If first xml workflow, Generate DOI.
+
+------------------------------
+LaTeX to XML Conversion
+-----------------------------------------------------------------------
+For UP journals (pop, joc, jors, dsj, eco, tellusA, tellusB) - TeX Workflow:
+-----------------------------------------------------------------------
+pop - latex workflow
+   \xmlauthor[1]{Author Name}{email}{orcid}
+   \xmlaffiliation[1]{Address}
+   \jname{pop}%For UP journals only
+   \jnlvol{1}
+   \jnliss{1}
+Change Equations: Align, Aligned, Eqnarray  TO  Split
+
+Batch Server script:
+   t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\Convert_T2X_upj.bat filename.tex
+   py t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\TeX_Eqn_Img_Extract.py filename.xml
+
+Local script:
+   d:\Balaji\Code\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\Convert_T2X.bat filename.tex
+   py d:\Balaji\Code\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\TeX_Eqn_Img_Extract.py filename.xml
+
+
+------------------------------------------------------
+For OLH journal
+------------------------------------------------------
+1. Change \Tree tag code in single line.
+2. Insert enter mark before/after:
+        \pex<snow2>
+        \ex<exno = i>
+        \xe
+3. Check space after \ex
+4. Check for subfigure, subcaption and change it
+5. Replace splited equation into one $$ to $ $
+6. Merge \trans or \glt multipara to single and sep with \\
+7. Check for Sup/Sub in text mode: \text{e_2}
+8. Change: \textepsilon - $\epsilon$
+9. Check \textipa symbol.
+10. Check \cdot symbol.
+11. If expex package, check carefully.
+12. Change \definecolor{textcolor}{cmyk}{0,0,0,1}
+    to     \definecolor{textcolor}{cmyk}{0,0,0,0.95}
+13. Every equation should convert to text? Check with Gnanasekar
+14. In preclean1.tex: Check for opening and closing brace mismatch
+
+Batch script:
+   Server: t:\Products\03_LaTeX_to_XML\Support\OLH_TeX_Workflow\Convert_T2X_olh.bat glossa
+   Local:  d:\Balaji\Code\03_LaTeX_to_XML\Support\Glossa\Convert_T2X.bat glossa
+
+   Server: call py t:\Products\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\TeX_Eqn_Img_Extract.py glossa-11-
+   Local:  call py d:\Balaji\Code\03_LaTeX_to_XML\Support\UPJ_TeX_Workflow\TeX_Eqn_Img_Extract.py glossa-11-
+
+After Conversion:
+Check text: missing, exbreak, check
+In XML (End of body matter), Check count of Example, Glossa List, Ref, Label.
+Check <styled-content style="color: #000000">
+Footnote list to take care
+Check footnote multiple para
+Example list number to take care
+Small caps need to take care
+
+------------------------------------------------------
+For Ergo journal
+------------------------------------------------------
+Batch script:
+   Server: call t:\Products\03_LaTeX_to_XML\Support\ergo\Convert_T2X_ergo.bat %1
+   Local:  call d:\Balaji\Code\03_LaTeX_to_XML\Support\ergo\Convert_T2X.bat %1
+
+------------------------------------------------------
+For Inggrid:
+------------------------------------------------------
+t:\Products\03_LaTeX_to_XML\Support\inggrid\inggrid.bat
+
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\common\Biblatex_natbib_conv_inggrid.py main.tex
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\inggrid\Inggrid_TeX_Clean.py natbib_ref.tex
+call latexml --includestyles --nocomments --log=document.log --preload=LaTeXML.cache --destination=Conv1.xml preclean.tex
+call latexmlpost --verbose --nopictureimages --nographicimages --destination=Conv2.xml --format=jats --stylesheet=d:\Balaji\Code\03_LaTeX_to_XML\Support\inggrid\Inggrid_jats_LaTeXML.xsl Conv1.xml
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\inggrid\Inggrid_XML_Clean.py Conv2.xml
+
+------------------------------------------------------
+For jcls journal
+------------------------------------------------------
+t:\Products\03_LaTeX_to_XML\Support\jcls\jcls.bat
+
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\jcls\Jcls_TeX_Clean.py natbib_ref.tex
+call latexml --includestyles --nocomments --log=document.log --destination=Conv1.xml preclean.tex
+call latexmlpost --verbose --nopictureimages --nographicimages --destination=Conv2.xml --format=jats --stylesheet=d:\Balaji\Code\03_LaTeX_to_XML\Support\jcls\Jcls_jats_LaTeXML.xsl Conv1.xml
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\jcls\Jcls_XML_Clean.py Conv2.xml
+
+Note for Jcls:
+1. Check for missing parenthesis {} in tex file.
+2. IF MORE ERRORS, CHANGE THE DOCUMENTCLASS TO ARTICLE AND START CONVERT.
+   If jcls.cls, not converted change template to:
+      \documentclass{article}
+3. Convert svg to pdf
+4. Change \includesvg to \includegraphics
+5. Change .svg} to .pdf}
+6. Compile using lualatex --shell-escape main.tex for some cases
+
+Update this code in jcls.cls:
+\IfFileExists{./metadata/self.bib}
+{%\addbibresource{./metadata/self.bib} \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}
+}
+{\ClassWarning{jcls}{./metadata/self.bib not found}\metadatafalse}
+
+jcls - Note for QC: 
+Check the link part carefully (Figure 2a, Table 1, Appendix A, etc)
+
+------------------------------------------------------
+For Phimp journal
+------------------------------------------------------
+Server: t:\Products\03_LaTeX_to_XML\Support\phimp\Convert_T2X_phimp.bat filename.tex
+
+Local:
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\phimp\Phimp_TeX_Clean.py main.tex
+call latexml --includestyles --nocomments --log=document.log --preload=LaTeXML.cache --destination=Conv1.xml preclean.tex
+call latexmlpost --verbose --nopictureimages --nographicimages --destination=Conv2.xml --format=jats --stylesheet=d:\Balaji\Code\03_LaTeX_to_XML\Support\phimp\Phimp_jats_LaTeXML.xsl Conv1.xml
+call py d:\Balaji\Code\03_LaTeX_to_XML\Support\phimp\Phimp_XML_Clean.py Conv2.xml
+
+------------------------------------------------------
+
+
