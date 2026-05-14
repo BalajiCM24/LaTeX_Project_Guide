@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rss-s)alm0dt&t!l%&8dr5ce6b)u+*in12*q57ya5=xlo*%yye
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['balajicm24.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['manthirabalaji.pythonanywhere.com', 'balajicm24.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
